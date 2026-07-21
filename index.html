@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Robot Arm Controller</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Web Serial GUI</p>
+          <h1>Robot Arm Controller</h1>
+          <p class="subtitle">Control Arduino with the same serial commands you already use.</p>
+        </div>
+        <div class="connection-card">
+          <span id="connectionStatus" class="status-dot">Disconnected</span>
+          <div class="connection-actions">
+            <button id="connectButton" class="primary">Connect Arduino</button>
+            <button id="disconnectButton" disabled>Disconnect</button>
+          </div>
+        </div>
+      </header>
+
+      <section class="panel">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">Servo Motors</p>
+            <h2>M1 - M5 Grades</h2>
+          </div>
+          <span class="hint">Sends: m1-90, m2-120, ...</span>
+        </div>
+        <div id="servoGrid" class="motor-grid"></div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">Holder</p>
+            <h2>Open / Close / Home</h2>
+          </div>
+          <span class="hint">Sends: o-30, c-30, h</span>
+        </div>
+        <div class="holder-layout">
+          <button class="danger command-button" data-command="h">H Home 0°</button>
+          <div id="holderGrid" class="holder-grid"></div>
+        </div>
+      </section>
+
+      <section class="panel split">
+        <div>
+          <div class="section-title compact">
+            <div>
+              <p class="eyebrow">Stepper</p>
+              <h2>MX / MY Movement</h2>
+            </div>
+          </div>
+          <div class="stepper-controls">
+            <label class="step-input">
+              Step distance
+              <input id="stepAmount" type="number" min="1" step="1" value="100" />
+            </label>
+            <div class="axis-card">
+              <h3>MX Axis</h3>
+              <div class="axis-buttons">
+                <button class="hold-command" data-axis="mx" data-direction="-">− Left</button>
+                <button class="hold-command" data-axis="mx" data-direction="+">+ Right</button>
+              </div>
+            </div>
+            <div class="axis-card">
+              <h3>MY Axis</h3>
+              <div class="axis-buttons">
+                <button class="hold-command" data-axis="my" data-direction="-">− Down</button>
+                <button class="hold-command" data-axis="my" data-direction="+">+ Up</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="section-title compact">
+            <div>
+              <p class="eyebrow">Settings</p>
+              <h2>Status / Calibration</h2>
+            </div>
+          </div>
+          <div class="settings-grid">
+            <button class="primary command-button" data-command="status">Get Status</button>
+            <button class="command-button" data-command="reset">Reset Position</button>
+            <button class="danger command-button" data-command="factory" data-confirm="Factory reset will clear saved calibration values. Continue?">Factory Reset</button>
+          </div>
+          <div class="calibration">
+            <div>
+              <h3>X Calibration</h3>
+              <div class="settings-grid">
+                <button class="command-button" data-command="setx0">Set X0</button>
+                <button class="command-button" data-command="setxm">Set XM</button>
+                <button class="command-button" data-command="setxe">Set XE</button>
+                <button class="command-button" data-command="x0">Go X0</button>
+                <button class="command-button" data-command="xm">Go XM</button>
+                <button class="command-button" data-command="xe">Go XE</button>
+              </div>
+            </div>
+            <div>
+              <h3>Y Calibration</h3>
+              <div class="settings-grid">
+                <button class="command-button" data-command="sety0">Set Y0</button>
+                <button class="command-button" data-command="setym">Set YM</button>
+                <button class="command-button" data-command="setye">Set YE</button>
+                <button class="command-button" data-command="y0">Go Y0</button>
+                <button class="command-button" data-command="ym">Go YM</button>
+                <button class="command-button" data-command="ye">Go YE</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel console-panel">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">Serial Monitor</p>
+            <h2>Console</h2>
+          </div>
+          <button id="clearLogButton">Clear</button>
+        </div>
+        <pre id="statusOutput" class="status-output">Status output will appear here.</pre>
+        <form id="manualCommandForm" class="manual-command">
+          <input id="manualCommandInput" placeholder="Type command, e.g. m1-90" autocomplete="off" />
+          <button class="primary" type="submit">Send</button>
+        </form>
+        <pre id="serialLog" class="serial-log"></pre>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
