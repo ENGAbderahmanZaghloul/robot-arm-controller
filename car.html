@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Car Controller</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="car-controller.css" />
+  </head>
+  <body>
+    <main class="shell car-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">ESP Wi‑Fi Controller</p>
+          <h1>Smart Car Controller</h1>
+          <p class="subtitle">
+            Connect your device to a car Wi‑Fi network, then control speed and movement from here.
+          </p>
+          <p class="subtitle"><a class="page-link" href="index.html">← Back to robot arm</a></p>
+        </div>
+        <div class="connection-card">
+          <span id="carStatusDot" class="status-dot">Not checked</span>
+          <div class="connection-actions">
+            <button id="statusButton" class="primary">Check Car</button>
+            <button id="stopButton" class="danger">Stop</button>
+          </div>
+        </div>
+      </header>
+
+      <section class="panel car-config">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">Car Network</p>
+            <h2>Select Car</h2>
+          </div>
+          <span class="hint">Default ESP AP IP: 192.168.4.1</span>
+        </div>
+        <div class="car-config-grid">
+          <label class="step-input">
+            Car
+            <select id="carSelect">
+              <option value="car1">car1</option>
+              <option value="car2">car2</option>
+              <option value="car3">car3</option>
+              <option value="smart-car">smart-car</option>
+            </select>
+          </label>
+          <label class="step-input">
+            ESP address
+            <input id="carHostInput" value="http://192.168.4.1" autocomplete="off" />
+          </label>
+        </div>
+      </section>
+
+      <section class="panel split car-control-layout">
+        <div>
+          <div class="section-title compact">
+            <div>
+              <p class="eyebrow">Speed</p>
+              <h2>Motor Power</h2>
+            </div>
+            <span id="speedValue" class="current-angle">220</span>
+          </div>
+          <div class="speed-card">
+            <input id="speedSlider" type="range" min="0" max="255" value="220" />
+            <div class="speed-presets">
+              <button class="speed-preset" data-speed="80">Slow</button>
+              <button class="speed-preset" data-speed="160">Normal</button>
+              <button class="speed-preset primary" data-speed="220">Fast</button>
+              <button class="speed-preset danger" data-speed="255">Max</button>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="section-title compact">
+            <div>
+              <p class="eyebrow">Status</p>
+              <h2>Live Response</h2>
+            </div>
+          </div>
+          <pre id="carLog" class="status-output">Car messages will appear here.</pre>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">Movement</p>
+            <h2>Press and Hold</h2>
+          </div>
+          <span class="hint">Release any button to send /stop</span>
+        </div>
+        <div class="drive-pad">
+          <button class="drive-button diagonal" data-dir="fl">↖<span>Up Left</span></button>
+          <button class="drive-button primary" data-dir="f">↑<span>Up</span></button>
+          <button class="drive-button diagonal" data-dir="fr">↗<span>Up Right</span></button>
+          <button class="drive-button" data-dir="l">←<span>Left</span></button>
+          <button id="centerStopButton" class="drive-button danger">■<span>Stop</span></button>
+          <button class="drive-button" data-dir="r">→<span>Right</span></button>
+          <button class="drive-button diagonal" data-dir="bl">↙<span>Down Left</span></button>
+          <button class="drive-button primary" data-dir="b">↓<span>Down</span></button>
+          <button class="drive-button diagonal" data-dir="br">↘<span>Down Right</span></button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">Free Control</p>
+            <h2>Drag the Bullet</h2>
+          </div>
+          <span id="joystickDirection" class="hint">Idle</span>
+        </div>
+        <div class="joystick-wrap">
+          <div id="joystickPad" class="joystick-pad" aria-label="Free control joystick">
+            <div id="joystickBullet" class="joystick-bullet"></div>
+          </div>
+          <p class="subtitle joystick-help">
+            Drag away from center to drive. Distance controls speed, direction controls movement.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <script src="car-controller.js"></script>
+  </body>
+</html>

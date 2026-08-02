@@ -18,6 +18,29 @@ http://localhost:5173
 
 Click `Connect Arduino`, choose the Arduino USB serial port, then use the buttons.
 
+## Smart Car Controller
+
+The car controller is a separate page:
+
+```text
+http://localhost:5173/car.html
+```
+
+Connect your computer/phone Wi‑Fi to one of the ESP access points first:
+
+- `car1`
+- `car2`
+- `car3`
+- `smart-car`
+
+The default ESP address is `http://192.168.4.1`. Use the speed slider, press-and-hold movement buttons, or drag the free-control bullet joystick. The page calls:
+
+- Move: `/move?dir=f`, `/move?dir=b`, `/move?dir=l`, `/move?dir=r`
+- Diagonal: `/move?dir=fr`, `/move?dir=fl`, `/move?dir=br`, `/move?dir=bl`
+- Stop: `/stop`
+- Speed: `/speed?v=220`
+- Status: `/status`
+
 ## Commands Sent
 
 - Servo motors: `m1-0` through `m5-180`
