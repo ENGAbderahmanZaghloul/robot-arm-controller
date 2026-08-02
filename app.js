@@ -1,6 +1,7 @@
 const BAUD_RATE = 115200;
 const SERVO_ANGLES = Array.from({ length: 19 }, (_, index) => index * 10);
-const HOLDER_ANGLES = Array.from({ length: 6 }, (_, index) => index * 10);
+const M1_ANGLES = [0, 3, 5, 7, ...SERVO_ANGLES.slice(1)];
+const HOLDER_ANGLES = [0, 20, 50, 60, 70, 80, 90, 110, 120];
 const HOLD_REPEAT_MS = 220;
 
 const state = {
@@ -52,7 +53,8 @@ function buildServoControls() {
     `;
 
     const buttons = card.querySelector(".grade-buttons");
-    SERVO_ANGLES.forEach((angle) => {
+    const angles = motorNumber === 1 ? M1_ANGLES : SERVO_ANGLES;
+    angles.forEach((angle) => {
       buttons.append(createButton(`${angle}°`, `m${motorNumber}-${angle}`));
     });
 
